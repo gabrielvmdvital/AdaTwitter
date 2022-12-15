@@ -2,8 +2,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Usuario {
-   private String usuario;
-   private String senha;
+   private String user;
+   private String password;
 
    public static int numUsuarios = 0;
    public String[] twitts = new String[100];
@@ -12,20 +12,21 @@ public class Usuario {
    public Usuario(){
    }
 
-   public Usuario(String usuario, String senha){
-       this.usuario = usuario;
-       this.senha = senha;
+   public Usuario(String user, String password){
+       this.user = user;
+       this.password = password;
        numUsuarios++;
    }
 
    public String getUsuario(){
-       return this.usuario;
+       return this.user;
    }
+   public String getPassword(){return this.password;}
 
    public void twitar(String msg){
        System.out.println("Tweet feito com sucesso!");
        DateTimeFormatter dateTimeF = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
-       twitts[nTwite] = dateTimeF.format(LocalDateTime.now()) +" "+ msg + " - " + this.usuario;
+       twitts[nTwite] = dateTimeF.format(LocalDateTime.now()) +" "+ msg + " - " + this.user;
        nTwite++;
     }
 
@@ -38,7 +39,7 @@ public class Usuario {
            }
        }
        else {
-               System.out.println(this.usuario +" não possui tweetts em sua linha do tempo!");
+               System.out.println(this.user + " não possui tweetts em sua linha do tempo!");
        }
 
 
