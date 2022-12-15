@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Usuario {
+public class User {
    private String user;
    private String password;
 
@@ -9,10 +9,10 @@ public class Usuario {
    public String[] twitts = new String[100];
    public int nTwite = 0;
 
-   public Usuario(){
+   public User(){
    }
 
-   public Usuario(String user, String password){
+   public User(String user, String password){
        this.user = user;
        this.password = password;
        numUsuarios++;
