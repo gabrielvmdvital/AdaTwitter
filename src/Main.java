@@ -62,11 +62,9 @@ public class Main {
                                 System.out.print("No que você está pensando? ou S para sair! ");
                                 msg = sc.nextLine();
                                 if ("sair".equals(msg.toLowerCase()) || "s".equals(msg.toLowerCase())) {
-                                   // twInfra.timeLineArray[twInfra.idUser] = twInfra.userLogado.twitts;
                                     break loopUserTweetar;
                                 } else {
-                                    twInfra.userLogado.twitar(msg);
-                                    twInfra.saveNewTweete(msg);
+                                    twInfra.saveNewTweete(twInfra.userLogado.twitar(msg));
                                 }
 
                             } else if (opcoesLogado == 2) {
