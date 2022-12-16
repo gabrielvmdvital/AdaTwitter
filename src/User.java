@@ -5,23 +5,34 @@ public class User {
    private String user;
    private String password;
 
+   private String name;
+   private String mail;
+   private String birth;
+
    public static int numUsuarios = 0;
-   public String[] twitts = new String[100];
+   public String[] twitts = new String[1000];
    public int nTwite = 0;
 
    public User(){
+
    }
 
-   public User(String user, String password){
+   public User(String user, String password, String name, String mail, String birth){
        this.user = user;
        this.password = password;
+       this.name = name;
+       this.mail = mail;
+       this.birth = birth;
        numUsuarios++;
    }
 
-   public String getUsuario(){
+    public String getUser(){
        return this.user;
    }
-   public String getPassword(){return this.password;}
+    public String getPassword(){return this.password;}
+    public String getName(){return this.name;}
+    public String getMail(){return  this.mail;}
+    public String getBirth(){return this.birth;}
 
    public void twitar(String msg){
        System.out.println("Tweet feito com sucesso!");
@@ -46,10 +57,25 @@ public class User {
    }
 
    public void deletarTwitter(int nTwite){
+       String[] auxTweets = new String [twitts.length];
        if (nTwite - 1 >=0) {
            if (twitts[nTwite - 1] != null) {
                twitts[nTwite - 1] = null;
                System.out.println("Tweet excluido com sucesso!");
+           }
+           int notNull = 0;
+           for(int numTwite = 0; numTwite < twitts.length; numTwite++){
+               if(twitts[numTwite+1] != null){
+                   if(notNull <= nTwite-1){
+                       auxTweets[notNull] = twitts[numTwite];
+                   }
+               }
+               notNull++;
+
+           }
+           twitts = auxTweets;
+           if(nTwite > 0) {
+               nTwite--;
            }
        }
        else{
