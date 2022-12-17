@@ -4,6 +4,8 @@ This repository is dedicated to the final project of module one: Programming Log
 
 Americanas - Polo Tech | Backend, class #925
 
+Autor - Gabriel Victor M. O. Vital
+
 
 # Statement
 
