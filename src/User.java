@@ -30,14 +30,31 @@ public class User {
        return this.user;
    }
     public String getPassword(){return this.password;}
+    public void setPassword(String newPassword){
+        this.password = newPassword;
+    }
     public String getName(){return this.name;}
+    public void setName(String newName){
+        this.name = newName;
+    }
     public String getMail(){return  this.mail;}
+
     public String getBirth(){return this.birth;}
+    public void setBirthDay(String newBirth){
+       this.birth = newBirth;
+    }
+
+    public void getUserData(){
+        System.out.println("Name: " + getName()+".");
+        System.out.println("Birthday: " + getBirth()+".");
+
+
+    }
 
    public String twitar(String msg){
        System.out.println("Tweet feito com sucesso!");
        DateTimeFormatter dateTimeF = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
-       msg = "Date ["+dateTimeF.format(LocalDateTime.now())+"]" + "[@" +this.user + "]" + msg;
+       msg = "["+dateTimeF.format(LocalDateTime.now())+"] - " + "@" +this.user + " say: " + msg;
        twitts[nTwite] = msg;
        nTwite++;
        return msg;
@@ -86,6 +103,7 @@ public class User {
        }
        return stringIsDeleted;
    }
+
 
 
 }

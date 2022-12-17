@@ -119,4 +119,42 @@ public class AdaTwitter {
 
     }
 
+    public void viewUserData(){
+        if (userLogado !=null){
+            userLogado.getUserData();
+        }
+    }
+
+    public void userNameUpdate(String newUserName) {
+        if (userLogado != null) {
+            userLogado.setName(newUserName);
+            System.out.println("Changed name!");
+        }
+        else{
+            System.out.println("user is not logged in!");
+        }
+    }
+
+    public void passwordUpdate(String newPassword){
+        if(userLogado!=null) {
+            userLogado.setPassword(newPassword);
+            System.out.println("changed password!");
+        }
+        else{
+            System.out.println("user is not logged in!");
+        }
+    }
+
+    public void birthDayUpdate(String newBirthDay) {
+        if(userLogado!=null){
+            userLogado.setBirthDay(newBirthDay);
+            System.out.println("Changed birthday!");
+        }
+
+        else{
+            System.out.println("user is not logged in!");
+        }
+    }
+
+
 }
