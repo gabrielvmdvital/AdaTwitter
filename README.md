@@ -22,3 +22,7 @@ Let's build a Twitter replica! Your program must have at least three features:
 Note one: tweets must contain the author of the tweet and the date on which it was published.
 
 Note two: It is not necessary to connect to any type of database, everything will be done in memory.
+
+
+# Additional functionality
+Under construction...
