@@ -10,7 +10,7 @@ public class User {
    private String birth;
 
    public static int numUsuarios = 0;
-   public String[] twitts = new String[1000];
+   public String[] twitts = new String[1];
    public int nTwite = 0;
 
    public User(){
@@ -51,15 +51,29 @@ public class User {
 
     }
 
+    public String[] getTwitts(){
+       return twitts;
+    }
+
    public String twitar(String msg){
        System.out.println("Tweet feito com sucesso!");
        DateTimeFormatter dateTimeF = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
        msg = "["+dateTimeF.format(LocalDateTime.now())+"] - " + "@" +this.user + " say: " + msg;
+       expandTwittsArray();
        twitts[nTwite] = msg;
        nTwite++;
        return msg;
     }
+   public void expandTwittsArray(){
+       String[] auxTwittsArray = new String[twitts.length+1];
+       for(int nTwitsAux = 0; nTwitsAux < nTwite; nTwitsAux++) {
+           if (twitts[nTwitsAux] != null) {
+               auxTwittsArray[nTwitsAux] = twitts[nTwitsAux];
+           }
+       }
+       twitts = auxTwittsArray;
 
+   }
    public void timeline(){
        if (nTwite != 0) {
            for (int twitt = nTwite; twitt >= 0; twitt--) {
