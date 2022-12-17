@@ -140,7 +140,7 @@ public class Main {
                                     System.out.print("Want to logout? (S/N): ");
                                     if("S".equals(sc.nextLine().toUpperCase())){
                                         System.out.println();
-                                        System.out.println(twInfra.userLogado.getUser() + "Logout...");
+                                        System.out.println(twInfra.userLogado.getUser() + " Logout...");
                                         twInfra.userLogado = null;
                                         break loopUserLogged;
                                     }
@@ -164,7 +164,7 @@ public class Main {
                                     System.out.print("Want to relog? (S/N): ");
                                     if("S".equals(sc.nextLine().toUpperCase())){
                                         System.out.println();
-                                        System.out.println(twInfra.userLogado.getUser() + "Logout...");
+                                        System.out.println(twInfra.userLogado.getUser() + " Logout...");
                                         twInfra.userLogado = null;
                                         break loopUserLogged;
                                     }
@@ -182,7 +182,7 @@ public class Main {
 
                             } else if (opcoesLogado == 0) {
                                 System.out.println();
-                                System.out.println(twInfra.userLogado.getUser() + "Logout...");
+                                System.out.println(twInfra.userLogado.getUser() + " Logout...");
                                 twInfra.userLogado = null;
                                 break loopUserLogged;
                             }
