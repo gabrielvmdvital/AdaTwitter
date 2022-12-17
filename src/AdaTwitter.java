@@ -1,13 +1,20 @@
+import java.sql.Array;
+
 public class AdaTwitter {
 
-    public static  Usuario[] users = new Usuario[2];
+    public static  User[] users = new User[2];
     public static int nUser = 0;
 
-    public Usuario userLogado = null;
+    public static String[] timeLineArray = new String[2];
+    public static int nTweeteInTimeLine = 0;
 
-    public static Usuario[] expandirArrayUser(){
+    public User userLogado = null;
+
+    public static int idUser = 0;
+
+    public static User[] expandirArrayUser(){
         if(nUser == users.length - 1) {
-            Usuario[] auxArray = new Usuario[users.length + 1];
+            User[] auxArray = new User[users.length + 1];
             for(int nLength = 1; nLength <= nUser+1; nLength++){
                 if(users[nLength-1] != null){
                     auxArray[nLength-1] = users[nLength-1];
@@ -17,71 +24,98 @@ public class AdaTwitter {
         }
         return users;
     }
-    public static void cadastrarUsuario(String login, String password){
-        Usuario newUser = new Usuario(login, password);
-        if (users[nUser] == null) {
-            users[nUser] = newUser;
-            users = expandirArrayUser();
-            nUser++;
+
+    public static String[] expandirTimeLineArray(){
+            String[] auxArray = new String[timeLineArray.length + 1];
+            for(int nLength = 0; nLength < nTweeteInTimeLine; nLength++){
+                if(timeLineArray[nLength] != null){
+                    auxArray[nLength] = timeLineArray[nLength];
+                }
+            }
+            return auxArray;
+    }
+
+    public void saveNewTweete(String tweete){
+        timeLineArray = expandirTimeLineArray();
+        for(int position = 0; position < nTweeteInTimeLine+1; position++) {
+            if (timeLineArray[position] == null) {
+                timeLineArray[nTweeteInTimeLine] = tweete;
+                break;
+            }
+        }
+        nTweeteInTimeLine++;
+    }
+
+    public void viewFullTimeLine(){
+        for(int twRecente = timeLineArray.length -1; twRecente >= 0; twRecente--) {
+            if (timeLineArray[twRecente] != null) {
+                System.out.println(timeLineArray[twRecente]);
+            }
+        }
+    }
+
+    public static void deletaTwiteOfTimeLine(String msgToDelete) {
+        for (int numTwite = 0; numTwite < timeLineArray.length; numTwite++) {
+
+            if (timeLineArray[numTwite] != null && timeLineArray[numTwite].equals(msgToDelete)) {
+                timeLineArray[numTwite] = null;
+            }
+        }
+
+        for (int numTwite = 0; numTwite < timeLineArray.length -1; numTwite++) {
+
+            if (timeLineArray[numTwite + 1] != null && timeLineArray[numTwite] == null) {
+                timeLineArray[numTwite] = timeLineArray[numTwite + 1];
+                timeLineArray[numTwite + 1] = null;
+            }
+        }
+    }
+    public static void cadastrarUsuario(String login, String password, String name, String mail, String birth) {
+        boolean userExist = false;
+        for (User user : users) {
+            if (user != null) {
+                if (login.equals(user.getUser()) || mail.equals(user.getMail())) {
+                    System.out.println("E-mail ou nome de usuário já existe!");
+                    userExist = true;
+                }
+                else {
+                    userExist = false;
+                }
+            }
+        }
+        if (!userExist) {
+            User newUser = new User(login, password, name, mail, birth);
+
+            if (users[nUser] == null) {
+                users[nUser] = newUser;
+                users = expandirArrayUser();
+                nUser++;
+            }
         }
     }
 
     public void loginSystem(String login, String password){
         boolean loginValidator = false;
-        boolean passwordInvalid = false;
-        boolean loginInvalid = false;
-        int idUser = 0;
 
-        for(int numUser = 0; numUser < nUser; numUser++){
-            if(!login.equals(users[numUser].getUsuario()) &&
-                    !password.equals(users[numUser].getPassword())){
-                loginValidator = false;
-                passwordInvalid = true;
-                loginInvalid = true;
-                userLogado = null;
-            }
-            else if(login.equals(users[numUser].getUsuario()) &&
-                    password.equals(users[numUser].getPassword())){
+        for(int numUser = 0; numUser < nUser; numUser++) {
+            if (login.equals(users[numUser].getUser()) &&
+                    password.equals(users[numUser].getPassword())) {
                 loginValidator = true;
                 idUser = numUser;
-            }
-
-            else {
-                if (password.equals(users[numUser].getPassword()) &&
-                        !login.equals(users[numUser].getUsuario())) {
-                    loginValidator = false;
-                    loginInvalid = true;
-                    passwordInvalid = false;
-
-
-                } else if (!password.equals(users[numUser].getPassword()) &&
-                        login.equals(users[numUser].getUsuario())) {
-                    loginValidator = false;
-                    loginInvalid = false;
-                    passwordInvalid = true;
-
-                }
-            }
-
-            if(loginValidator) {
-                userLogado =  users[idUser];
-                System.out.println("Bem-vindo ao AdaTweeter"+ userLogado.getUsuario() +"!");
-            }
-            else{
-                if(passwordInvalid && loginInvalid) {
-                    System.out.println("Usuario não existe!");
-                    System.out.println("Deseja cadastrar um usuário? ");
-                    userLogado = null;
-                } else if (passwordInvalid) {
-                    System.out.println("Senha Invalida!");
-                    userLogado = null;
-                } else if (loginInvalid) {
-                    System.out.println("Login Invalido!");
-                    userLogado = null;
-                }
+                break;
             }
         }
 
+        if(loginValidator) {
+            userLogado =  users[idUser];
+            System.out.println("Bem-vindo ao AdaTweeter "+ userLogado.getUser() +"!");
+            System.out.println();
+        }
+        else{
+                System.out.println("Login ou Senha são invalidos, ou usuário não foi cadastrado!");
+                userLogado = null;
+            System.out.println();
+        }
 
     }
 

@@ -34,11 +34,13 @@ public class User {
     public String getMail(){return  this.mail;}
     public String getBirth(){return this.birth;}
 
-   public void twitar(String msg){
+   public String twitar(String msg){
        System.out.println("Tweet feito com sucesso!");
-       DateTimeFormatter dateTimeF = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
-       twitts[nTwite] = dateTimeF.format(LocalDateTime.now()) +" "+ msg + " - " + this.user;
+       DateTimeFormatter dateTimeF = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+       msg = "Date ["+dateTimeF.format(LocalDateTime.now())+"]" + "[@" +this.user + "]" + msg;
+       twitts[nTwite] = msg;
        nTwite++;
+       return msg;
     }
 
    public void timeline(){
@@ -56,31 +58,33 @@ public class User {
 
    }
 
-   public void deletarTwitter(int nTwite){
-       String[] auxTweets = new String [twitts.length];
-       if (nTwite - 1 >=0) {
+   public String deletarTwitter(int nTwite){
+       String stringIsDeleted=null;
+       if (nTwite - 1 >=0 && nTwite -1 <= twitts.length) {
            if (twitts[nTwite - 1] != null) {
+               stringIsDeleted = twitts[nTwite - 1];
                twitts[nTwite - 1] = null;
                System.out.println("Tweet excluido com sucesso!");
            }
-           int notNull = 0;
-           for(int numTwite = 0; numTwite < twitts.length; numTwite++){
-               if(twitts[numTwite+1] != null){
-                   if(notNull <= nTwite-1){
-                       auxTweets[notNull] = twitts[numTwite];
+           for(int numTwite = 0; numTwite < twitts.length-1; numTwite++){
+                   if (twitts[numTwite + 1] != null && twitts[numTwite] == null) {
+                       twitts[numTwite] = twitts[numTwite + 1];
+                       twitts[numTwite + 1] = null;
+                       break;
                    }
                }
-               notNull++;
 
            }
-           twitts = auxTweets;
+
            if(nTwite > 0) {
                nTwite--;
            }
-       }
+
+
        else{
             System.out.println("Falha! Tweet não existe!");
        }
+       return stringIsDeleted;
    }
 
 
